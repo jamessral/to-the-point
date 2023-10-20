@@ -4,14 +4,7 @@
     <%= user.email %>
   </p>
 
-  <p>
-    <strong>Password digest:</strong>
-    <%= user.password_digest %>
+  <p data-controller="relative_date">
+    <span data-target="relative_date.date"><%= user.created_at %></span>
   </p>
-
-  <p>
-    <strong>Recovery password:</strong>
-    <%= user.recovery_password %>
-  </p>
-
 </div>
