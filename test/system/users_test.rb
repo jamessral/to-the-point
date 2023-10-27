@@ -14,28 +14,26 @@ class UsersTest < ApplicationSystemTestCase
 
   test 'should create user' do
     visit users_url
-    click_button 'New user'
+    click_link 'New user'
 
     fill_in 'Email', with: @user.email
-    fill_in 'Password digest', with: @user.password_digest
-    fill_in 'Recovery password', with: @user.recovery_password
-    click_button 'Create User'
+    fill_in 'Password', with: 'password'
+    fill_in 'Password confirmation', with: 'password'
+    click_button 'Sign up'
 
     assert_text 'User was successfully created'
-    click_button 'Back'
+    click_link 'Back'
   end
 
   test 'should update User' do
     visit user_url(@user)
-    click_button 'Edit this user', match: :first
+    click_link 'Edit this user', match: :first
 
     fill_in 'Email', with: @user.email
-    fill_in 'Password digest', with: @user.password_digest
-    fill_in 'Recovery password', with: @user.recovery_password
     click_button 'Update User'
 
     assert_text 'User was successfully updated'
-    click_button 'Back'
+    click_link 'Back'
   end
 
   test 'should destroy User' do

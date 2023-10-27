@@ -5,6 +5,6 @@
   </p>
 
   <p data-controller="relative_date">
-    <span data-target="relative_date.date"><%= user.created_at %></span>
+    <span data-target="relative_date.date"><%= user.created_at.to_datetime %></span>
   </p>
 </div>

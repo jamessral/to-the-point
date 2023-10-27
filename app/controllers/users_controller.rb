@@ -13,7 +13,7 @@ class UsersController < ApplicationController
 
   # GET /users/new
   def new
-    @user = User.new
+    @create_user_form = CreateUserForm.new
   end
 
   # GET /users/1/edit
@@ -21,15 +21,15 @@ class UsersController < ApplicationController
 
   # POST /users or /users.json
   def create
-    @user = User.new(user_params)
+    @create_user_form = CreateUserForm.new(create_user_params)
 
     respond_to do |format|
-      if @user.save
-        format.html { redirect_to user_url(@user), notice: 'User was successfully created.' }
-        format.json { render :show, status: :created, location: @user }
+      if @create_user_form.save
+        format.html { redirect_to user_url(@create_user_form.user), notice: 'User was successfully created.' }
+        format.json { render :show, status: :created, location: @create_user_form }
       else
         format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @user.errors, status: :unprocessable_entity }
+        format.json { render json: @create_user_form.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -64,8 +64,12 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
   end
 
+  def create_user_params
+    params.require(:create_user_form).permit(:email, :password, :password_confirmation)
+  end
+
   # Only allow a list of trusted parameters through.
   def user_params
-    params.require(:user).permit(:email, :password_digest, :recovery_password)
+    params.require(:user).permit(:email)
   end
 end
